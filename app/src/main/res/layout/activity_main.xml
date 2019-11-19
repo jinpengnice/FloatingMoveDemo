@@ -6,6 +6,13 @@
     android:background="@color/colorAccent"
     tools:context=".MainActivity">
 
+    <!-- 悬浮按钮 PopupWindow 显示时背景遮罩 -->
+    <View
+        android:id="@+id/shade_pop_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="#E5E5E5" />
     <!-- 注意只能通过外边距控制位置 -->
     <com.demo.wecharfloatingdemo.FloatingMoveButton
         android:id="@+id/floating_move_btn"

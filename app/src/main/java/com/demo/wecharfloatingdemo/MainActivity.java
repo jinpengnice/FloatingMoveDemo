@@ -1,5 +1,6 @@
 package com.demo.wecharfloatingdemo;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingMoveButton floatingMoveButton;
+    private View shadeShadeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) getSupportActionBar().hide();
 
         this.floatingMoveButton = findViewById(R.id.floating_move_btn);
+        this.shadeShadeView = findViewById(R.id.shade_pop_view);
 
 
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) floatingMoveButton.getLayoutParams();
@@ -54,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDismiss() {
                 floatingMoveButton.setVisibility(View.VISIBLE);
+                ObjectAnimator closeAnimator = ObjectAnimator.ofFloat(shadeShadeView, "alpha",
+                        0.9f, 0);
+                closeAnimator.setDuration(300);
+                closeAnimator.start();
             }
         });
         int radius = dp2px(26);
@@ -68,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         }
         popupWindow.showAsDropDown(floatingMoveButton);
         floatingMoveButton.setVisibility(View.GONE);
+        ObjectAnimator openAnimator = ObjectAnimator.ofFloat(shadeShadeView, "alpha",
+                0, 0.9f);
+        openAnimator.setDuration(300);
+        openAnimator.start();
     }
 
     public int dp2px(float dp) {
